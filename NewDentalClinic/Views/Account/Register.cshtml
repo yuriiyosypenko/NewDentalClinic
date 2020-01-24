@@ -1,0 +1,62 @@
+﻿@model NewDentalClinic.Models.Identity.RegisterModel
+
+@{
+    ViewBag.Title = "Register";
+}
+@{
+    Layout = null;
+}
+    <center>
+        <h2>Registration</h2>
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div>
+                @Html.ValidationSummary(false)
+
+                <div>
+                    E-mail
+                    <div>
+                        @Html.EditorFor(model => model.Email)
+                    </div>
+                </div>
+
+                <div>
+                    First name
+                    <div>
+                        @Html.EditorFor(model => model.FirstName)
+                    </div>
+                </div>
+
+                <div>
+                    Last name
+                    <div>
+                        @Html.EditorFor(model => model.LastName)
+                    </div>
+                </div>
+
+                <div>
+                    Password
+                    <div>
+                        @Html.EditorFor(model => model.Password)
+                    </div>
+                </div>
+
+                <div>
+                    Confirm password
+                    <div>
+                        @Html.EditorFor(model => model.PasswordConfirm)
+                    </div>
+                </div>
+                <p>
+                <div>
+                    <div>
+                        <input type="submit" value="Register" />
+                    </div>
+                </div>
+            </div>
+        }
+    </center>

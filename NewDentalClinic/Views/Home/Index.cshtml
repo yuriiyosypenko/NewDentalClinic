@@ -1,0 +1,12 @@
+﻿@{
+    Layout = null;
+}
+
+<center>
+    <p>
+        <font size="6"><b1>New dental clinic</b1></font>
+    <p>
+        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+        |
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+</center>
