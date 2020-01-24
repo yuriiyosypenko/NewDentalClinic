@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewDentalClinic", "NewDenta
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "DataBaseProject", "DataBaseProject\DataBaseProject.sqlproj", "{9B7B3046-0ACE-4A41-A1A2-6F2FD7C054B3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataBaseFirst", "DataBaseFirst\DataBaseFirst.csproj", "{BB0F0946-437A-4840-8CD6-C4B776482E08}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{9B7B3046-0ACE-4A41-A1A2-6F2FD7C054B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9B7B3046-0ACE-4A41-A1A2-6F2FD7C054B3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9B7B3046-0ACE-4A41-A1A2-6F2FD7C054B3}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{BB0F0946-437A-4840-8CD6-C4B776482E08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB0F0946-437A-4840-8CD6-C4B776482E08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB0F0946-437A-4840-8CD6-C4B776482E08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB0F0946-437A-4840-8CD6-C4B776482E08}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
