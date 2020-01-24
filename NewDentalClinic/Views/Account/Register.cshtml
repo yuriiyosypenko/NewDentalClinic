@@ -18,58 +18,64 @@
 
 
         <center>
-            <h2>Registration</h2>
-
-
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-
-                <div>
-                    @Html.ValidationSummary(false)
-
-                    <div>
-                        E-mail
-                        <div>
-                            @Html.EditorFor(model => model.Email)
-                        </div>
-                    </div>
+            <p>
+            <p>
+            <p>
+                <h2>Register</h2>
+            <p>
+            <p>
+                <img src="~/Content/images/Register.jpg">
+            <p>
+            <p>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
                     <div>
-                        First name
-                        <div>
-                            @Html.EditorFor(model => model.FirstName)
-                        </div>
-                    </div>
+                        @Html.ValidationSummary(false)
 
-                    <div>
-                        Last name
                         <div>
-                            @Html.EditorFor(model => model.LastName)
-                        </div>
-                    </div>
-
-                    <div>
-                        Password
-                        <div>
-                            @Html.EditorFor(model => model.Password)
-                        </div>
-                    </div>
-
-                    <div>
-                        Confirm password
-                        <div>
-                            @Html.EditorFor(model => model.PasswordConfirm)
-                        </div>
-                    </div>
-                    <p>
-                        <div>
+                            E-mail
                             <div>
-                                <input type="submit" value="Register" />
+                                @Html.EditorFor(model => model.Email)
                             </div>
                         </div>
-                </div>
-            }
+
+                        <div>
+                            First name
+                            <div>
+                                @Html.EditorFor(model => model.FirstName)
+                            </div>
+                        </div>
+
+                        <div>
+                            Last name
+                            <div>
+                                @Html.EditorFor(model => model.LastName)
+                            </div>
+                        </div>
+
+                        <div>
+                            Password
+                            <div>
+                                @Html.EditorFor(model => model.Password)
+                            </div>
+                        </div>
+
+                        <div>
+                            Confirm password
+                            <div>
+                                @Html.EditorFor(model => model.PasswordConfirm)
+                            </div>
+                        </div>
+                <p>
+                    <div>
+                        <div>
+                            <input type="submit" value="Register" />
+                        </div>
+                    </div>
+                    </div>
+                }
         </center>
     </body>
     </html>

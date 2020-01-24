@@ -14,30 +14,36 @@
 <body>
 
     <center>
-        <h2>Sign in</h2>
+        <p>
+        <p>
+        <p>
+            <h2>Sign in</h2>
+        <p>
+        <p>
+            <img src="~/Content/images/Login.jpg">
+        <p>
+        <p>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
 
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-
-            <div>
-                @Html.ValidationSummary()
-                <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
-                <p>
-                    <label>E-mail</label><br />
-                    @Html.EditorFor(x => x.Email)
-                </p>
-                <p>
-                    <label>Password</label><br />
-                    @Html.EditorFor(x => x.Password)
-                </p>
-                <p><button type="submit">Sign in</button></p>
+                <div>
+                    @Html.ValidationSummary()
+                    <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+            <p>
+                <label>E-mail</label><br />
+                @Html.EditorFor(x => x.Email)
+            </p>
+            <p>
+                <label>Password</label><br />
+                @Html.EditorFor(x => x.Password)
+            </p>
+            <p><button type="submit">Sign in</button></p>
             </div>
 
 
         }
-    </center>
+        </center>
 </body>
 </html>
