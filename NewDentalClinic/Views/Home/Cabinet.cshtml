@@ -6,13 +6,111 @@
 
 <html>
 <head>
+    <title>Cabinet</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/popper.min.js"></script>
-    <title>Cabinet</title>
+
+    <!-- CSS Includes -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
+    <!-- JS includes -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
 </head>
 <body>
-    Cabinet
+    <center>
+        Welcome to user's cabinet!
+        <div id='calendar' style="width: 50%;"> </div>
+    </center>
+
+    <div class="container">
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Select the procedure</h4>
+                        <button id="closeButton" type="button" class="close" data-dismiss="modal" align="right">&times;</button>
+                    </div>
+                    <p>
+                    <p>
+                        <div class="dropdown" align="center">
+                            <select id="procedureSelect" class="" tabindex="0" align="center">
+                                <option value="0">Select the procedure</option>
+                                <option value="1">Пломбирование</option>
+                                <option value="2">Пломбирование канала</option>
+                                <option value="3">Очистка от зубного камня</option>
+                                <option value="4">Установка коронки</option>
+                                <option value="5">Протезирование</option>
+                            </select>
+                        </div>
+                    <p>
+                    <p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var calStart = '';
+        var calEnd = '';
+        var caljsEvent = '';
+        var calViev = '';
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            selectable: true,
+            firstDay: 1, //The day that each week begins (Monday=1)
+            slotMinutes: 30,
+            events: '@Url.RouteUrl(new{ action="GetUserEvents", controller="Home"})',
+
+            //Клик по календарю
+            select: function (start, end, jsEvent, view) {
+                //Сбрасываем dropbox и выводим модальное окно
+                $("#procedureSelect").val('0');
+                $("#myModal").modal("show");
+
+                calStart = start;
+                calEnd = end;
+                caljsEvent = jsEvent;
+                calViev = view;
+            }
+        });
+
+        $("#procedureSelect").change(function () {
+            $("#myModal").modal("hide");
+            //Если процедура выбрана, создаем event и прорисовіваем его в календаре
+            if ($(this).val() != 0) {
+                var allDay = !calStart.hasTime && !calEnd.hasTime;
+                var newEvent = new Object();
+                newEvent.title = document.getElementById("procedureSelect").options[$(this).val()].text;
+                newEvent.start = moment(calStart).format();
+                newEvent.allDay = false;
+                $('#calendar').fullCalendar('renderEvent', newEvent);
+
+                //Отправляем данные в контроллер
+                jQuery.post(
+                    "/Home/SaveEvent",
+                    {
+                        title: newEvent.title,
+                        start: newEvent.start
+                    });
+            };
+        });
+    </script>
+
+
 </body>
 </html>

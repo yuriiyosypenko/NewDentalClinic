@@ -99,8 +99,16 @@ namespace NewDentalClinic.Controllers
                         IsPersistent = true
                     }, claim);
                     if (String.IsNullOrEmpty(returnUrl))
-                        return RedirectToAction("Index", "Home");
-                    return Redirect(returnUrl);
+                    {
+                        var userId = UserManager.FindByName(model.Email).Id;
+                        if (UserManager.IsInRole(userId, "User"))
+                        {
+                            return Redirect("/Home/Cabinet");
+                        }
+                        return Redirect("/Home/Admin");
+                    }
+                    else                        
+                        return Redirect(returnUrl);
                 }
             }
             ViewBag.returnUrl = returnUrl;
