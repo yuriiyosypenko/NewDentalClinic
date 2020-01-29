@@ -71,11 +71,13 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,agendaWeek,agendaDay'
+                //right: 'month,agendaWeek,agendaDay'
+                right: 'agendaWeek,agendaDay'
             },
             selectable: true,
             firstDay: 1, //The day that each week begins (Monday=1)
             slotMinutes: 30,
+            defaultView: 'agendaWeek',
             events: '@Url.RouteUrl(new{ action="GetUserEvents", controller="Home"})',
 
             //Клик по календарю
@@ -104,7 +106,7 @@
 
                 //Отправляем данные в контроллер
                 jQuery.post(
-                    "/Home/SaveEvent",
+                    "/Home/SaveUserEvent",
                     {
                         title: newEvent.title,
                         start: newEvent.start,

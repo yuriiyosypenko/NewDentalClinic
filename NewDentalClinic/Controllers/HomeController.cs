@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 using System.Globalization;
 using System.Security.Claims;
 
+
 namespace NewDentalClinic.Controllers
 {
     public class HomeController : Controller
@@ -31,7 +32,7 @@ namespace NewDentalClinic.Controllers
         //Сохраняем записи текущего пользователя
         [Authorize(Roles = "User")]
         [HttpPost]
-        public void SaveEvent(string title, string start, string procedureId)
+        public void SaveUserEvent(string title, string start, string procedureId)
         {
             var d = new NewDentalClinicEntities();
             var r = new Registration();
@@ -46,17 +47,12 @@ namespace NewDentalClinic.Controllers
         }
 
         //Отображаем записи текущего пользователя
-        [Authorize(Roles = "user")]
+        [Authorize(Roles = "User")]
         public JsonResult GetUserEvents()
         {
-            /*            var c = new NewDentalClinicEntities();
-                        var r = c.Registration.ToList().Where(t => t.UserId == User.Identity.GetUserId());
-                        return Json(r.Select(e => new { e.id, e.title, e.start }), JsonRequestBehavior.AllowGet);*/
-            return null;
+            var d = new NewDentalClinicEntities();
+            var r = d.Registration.ToList().Where(t => t.UserId == Guid.Parse(User.Identity.GetUserId()));
+            return Json(r.Select(e => new {title = e.Title, start = e.Start }), JsonRequestBehavior.AllowGet);
         }
-
-
-
-
     }
 }
