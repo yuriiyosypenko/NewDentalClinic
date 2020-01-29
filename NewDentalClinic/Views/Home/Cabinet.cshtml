@@ -26,8 +26,10 @@
 </head>
 <body>
     <center>
-        Welcome to user's cabinet!
-        <div id='calendar' style="width: 50%;"> </div>
+        <font size="6"><b>Welcome to user's cabinet!</b></font>
+        <p>
+         @Html.ActionLink("Log off", "Logout", "Account")
+         <div id='calendar' style="width: 50%;"> </div>
     </center>
 
     <div class="container">
@@ -43,13 +45,13 @@
                     <p>
                     <p>
                         <div class="dropdown" align="center">
-                            <select id="procedureSelect" class="" tabindex="0" align="center">
+                            <select id="procedureSelect" class="" tabindex="0" align="center">                        
                                 <option value="0">Select the procedure</option>
-                                <option value="1">Пломбирование</option>
-                                <option value="2">Пломбирование канала</option>
-                                <option value="3">Очистка от зубного камня</option>
-                                <option value="4">Установка коронки</option>
-                                <option value="5">Протезирование</option>
+                                <option value="44e74131-14fd-41f9-86c8-ba0821e1af95">Пломбирование</option>
+                                <option value="6e5a30e8-1634-42aa-aa95-b2e2dbfeb504">Пломбирование канала</option>
+                                <option value="54cbaf1c-caa1-409c-b097-cac866d73ec5">Очистка от зубного камня</option>
+                                <option value="f20d1f6d-bd65-4ede-8cab-9f0986ccfef3">Установка коронки</option>
+                                <option value="77a1f2fe-e930-446d-9f6d-8977be41da7e">Протезирование</option>
                             </select>
                         </div>
                     <p>
@@ -91,11 +93,11 @@
 
         $("#procedureSelect").change(function () {
             $("#myModal").modal("hide");
-            //Если процедура выбрана, создаем event и прорисовіваем его в календаре
+            //Если процедура выбрана, создаем event и прорисовываем его в календаре
             if ($(this).val() != 0) {
                 var allDay = !calStart.hasTime && !calEnd.hasTime;
                 var newEvent = new Object();
-                newEvent.title = document.getElementById("procedureSelect").options[$(this).val()].text;
+                newEvent.title = $("#procedureSelect option:selected").text();
                 newEvent.start = moment(calStart).format();
                 newEvent.allDay = false;
                 $('#calendar').fullCalendar('renderEvent', newEvent);
@@ -105,7 +107,8 @@
                     "/Home/SaveEvent",
                     {
                         title: newEvent.title,
-                        start: newEvent.start
+                        start: newEvent.start,
+                        procedureId: $(this).val() 
                     });
             };
         });

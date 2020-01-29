@@ -163,7 +163,7 @@
     </Compile>
     <Compile Include="Models\Identity\ApplicationContext.cs" />
     <Compile Include="Models\Identity\ApplicationUserManager.cs" />
-    <Compile Include="Models\Identity\AppllicationUser.cs" />
+    <Compile Include="Models\Identity\ApplicationUser.cs" />
     <Compile Include="Models\Identity\LoginModel.cs" />
     <Compile Include="Models\Identity\RegisterModel.cs" />
     <Compile Include="Models\Identity\Role.cs" />
