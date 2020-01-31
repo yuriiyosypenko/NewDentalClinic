@@ -53,7 +53,7 @@ namespace NewDentalClinic.Controllers
         {
             var d = new NewDentalClinicEntities();
             var r = d.Registration.ToList().Where(t => t.UserId == Guid.Parse(User.Identity.GetUserId()));
-            return Json(r.Select(e => new {title = e.Title, start = e.Start }), JsonRequestBehavior.AllowGet);
+            return Json(r.Select(e => new {title = e.Title, start = e.Start}), JsonRequestBehavior.AllowGet);
         }
         
         //Отображаем все записи для админа
@@ -73,7 +73,7 @@ namespace NewDentalClinic.Controllers
                         u.PhoneNumber + ") - " +
                         r.Title,
                 start = r.Start,
-                end = SqlFunctions.DateAdd("minute", p.RequiredTime.Value.Minutes + p.RequiredTime.Value.Hours * 60, r.Start).Value
+                end = SqlFunctions.DateAdd("minute", p.RequiredTime.Value.Minutes + p.RequiredTime.Value.Hours * 60, r.Start).Value                
             },
             JsonRequestBehavior.AllowGet);
         }
