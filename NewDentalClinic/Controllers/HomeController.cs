@@ -7,7 +7,7 @@ using DataBaseFirst;
 using Microsoft.AspNet.Identity;
 using System.Globalization;
 using System.Security.Claims;
-
+using System.Data.Entity.SqlServer;
 
 namespace NewDentalClinic.Controllers
 {
@@ -18,6 +18,7 @@ namespace NewDentalClinic.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin")]
         public ActionResult Admin()
         {
             return View();
@@ -53,6 +54,28 @@ namespace NewDentalClinic.Controllers
             var d = new NewDentalClinicEntities();
             var r = d.Registration.ToList().Where(t => t.UserId == Guid.Parse(User.Identity.GetUserId()));
             return Json(r.Select(e => new {title = e.Title, start = e.Start }), JsonRequestBehavior.AllowGet);
+        }
+        
+        //Отображаем все записи для админа
+        [Authorize(Roles = "Admin")]
+        public JsonResult GetAdminEvents()
+        {
+            var d = new NewDentalClinicEntities();
+
+            return Json(
+            from r in d.Registration
+            join u in d.AspNetUsers on r.UserId equals u.Id
+            join p in d.Procedure on r.ProcedureId equals p.Id
+            select new
+            {
+                title = u.FirstName + " " +
+                        u.LastName + " (" +
+                        u.PhoneNumber + ") - " +
+                        r.Title,
+                start = r.Start,
+                end = SqlFunctions.DateAdd("minute", p.RequiredTime.Value.Minutes + p.RequiredTime.Value.Hours * 60, r.Start).Value
+            },
+            JsonRequestBehavior.AllowGet);
         }
     }
 }

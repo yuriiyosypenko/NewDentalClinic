@@ -33,7 +33,7 @@ namespace NewDentalClinic.Controllers
         {
             if (ModelState.IsValid)
             {
-                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName=model.LastName };
+                ApplicationUser user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName=model.LastName, PhoneNumber=model.PhoneNumber };
                 IdentityResult result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -117,7 +117,7 @@ namespace NewDentalClinic.Controllers
         public ActionResult Logout()
         {
             AuthenticationManager.SignOut();
-            return RedirectToAction("Login");
+            return Redirect("/Home/Index");
         }
 
     }

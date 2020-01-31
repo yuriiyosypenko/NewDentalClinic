@@ -31,44 +31,51 @@
                 {
                     @Html.AntiForgeryToken()
 
+                <div>
+                    @Html.ValidationSummary(false)
+
                     <div>
-                        @Html.ValidationSummary(false)
-
+                        E-mail
                         <div>
-                            E-mail
-                            <div>
-                                @Html.EditorFor(model => model.Email)
-                            </div>
+                            @Html.EditorFor(model => model.Email)
                         </div>
+                    </div>
 
+                    <div>
+                        First name
                         <div>
-                            First name
-                            <div>
-                                @Html.EditorFor(model => model.FirstName)
-                            </div>
+                            @Html.EditorFor(model => model.FirstName)
                         </div>
+                    </div>
 
+                    <div>
+                        Last name
                         <div>
-                            Last name
-                            <div>
-                                @Html.EditorFor(model => model.LastName)
-                            </div>
+                            @Html.EditorFor(model => model.LastName)
                         </div>
+                    </div>
 
+                    <div>
+                        Phone number
                         <div>
-                            Password
-                            <div>
-                                @Html.EditorFor(model => model.Password)
-                            </div>
+                            @Html.EditorFor(model => model.PhoneNumber)
                         </div>
+                    </div>
 
+                    <div>
+                        Password
                         <div>
-                            Confirm password
-                            <div>
-                                @Html.EditorFor(model => model.PasswordConfirm)
-                            </div>
+                            @Html.EditorFor(model => model.Password)
                         </div>
-                <p>
+                    </div>
+
+                    <div>
+                        Confirm password
+                        <div>
+                            @Html.EditorFor(model => model.PasswordConfirm)
+                        </div>
+                    </div>
+<p>
                     <div>
                         <div>
                             <input type="submit" value="Register" />

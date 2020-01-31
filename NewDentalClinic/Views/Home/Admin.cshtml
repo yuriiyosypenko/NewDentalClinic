@@ -6,14 +6,92 @@
 
 <html>
 <head>
+    <title>Admin</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/popper.min.js"></script>
-    <title>Admin</title>
+
+    <!-- CSS Includes -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.css">
+    <!-- JS includes -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.16.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.0.1/fullcalendar.min.js"></script>
 </head>
 <body>
-    Admin
+    <center>
+        <font size="6"><b>Welcome to admin's cabinet!</b></font>
+        <p>
+            @Html.ActionLink("Log off", "Logout", "Account")
+            <div id='calendar' style="width: 50%;"> </div>
+    </center>
+
+    <script type="text/javascript">
+        var calStart = '';
+        var calEnd = '';
+        var caljsEvent = '';
+        var calViev = '';
+
+        $('#calendar').fullCalendar({
+            header: {
+                left: 'prev,next today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            selectable: true,
+            firstDay: 1, //The day that each week begins (Monday=1)
+            slotMinutes: 30,
+            defaultView: 'agendaWeek',
+            eventLimit: 3,
+            events: '@Url.RouteUrl(new{ action="GetAdminEvents", controller="Home"})',
+
+            eventLimitClick: function () {
+                $('[data-toggle="tooltip"]').tooltip({ container: 'body', html: true });
+                return "popover";
+},
+
+/*            //Клик по календарю
+            select: function (start, end, jsEvent, view) {
+                //Сбрасываем dropbox и выводим модальное окно
+                $("#procedureSelect").val('0');
+                $("#myModal").modal("show");
+
+                calStart = start;
+                calEnd = end;
+                caljsEvent = jsEvent;
+                calViev = view;
+            }*/
+        });
+
+/*        $("#procedureSelect").change(function () {
+            $("#myModal").modal("hide");
+            //Если процедура выбрана, создаем event и прорисовываем его в календаре
+            if ($(this).val() != 0) {
+                var allDay = !calStart.hasTime && !calEnd.hasTime;
+                var newEvent = new Object();
+                newEvent.title = $("#procedureSelect option:selected").text();
+                newEvent.start = moment(calStart).format();
+                newEvent.allDay = false;
+                $('#calendar').fullCalendar('renderEvent', newEvent);
+
+                //Отправляем данные в контроллер
+                jQuery.post(
+                    "/Home/SaveUserEvent",
+                    {
+                        title: newEvent.title,
+                        start: newEvent.start,
+                        procedureId: $(this).val()
+                    });
+            };
+        });*/
+    </script>
+
+
 </body>
 </html>
-
